@@ -1,7 +1,8 @@
 body{
-  background: silver;
+  height: 98vh;
   text-align: center;
 }
+
 h1 {
   font-size: 40px;
 }
@@ -9,22 +10,37 @@ h2{
   margin-bottom: 30px;
   font-size: 20px;
 }
+.board {
+  height: 560px;
+  background: url("../img/pan.jpg");
+  background-size: 900px 560px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #e3e3e3;
+}
+.innerBoard {
+  padding-top: 122px;
+}
 .cell{
-  background: darkred;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   display: inline-block;
   vertical-align: top;
   margin: 2px 0;
   font-size: 40px;
-  line-height: 150px;
-  color: white;
+  line-height: 100px;
 }
 .cellX{
-  background: rgb(200,0,0);
+  background: url("../img/bacon-x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .cellO{
-  background: rgb(128,128,128);
+  background: url("../img/egg-o.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 button{
   font-size: 20px;
@@ -44,10 +60,67 @@ label{
   margin-bottom: 0px;
 }
 
+
 @media (max-width: 480px) {
   .cell {
-    width: 75px;
-    height: 75px;
-    line-height: 75px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
   }
+  .board {
+    height: 280px;
+    background-size: 450px 280px;
+  }
+  .innerBoard {
+    padding-top: 61px;
+  }
+  button#reset {
+    margin-top: 10px;
+  }
+
+}
+
+img {
+  max-width: 18px;
+  max-height: 18px;
+  vertical-align: bottom;
+}
+#curPlayer {
+  background-color: #0e0c0f;
+  padding: 30px;
+  color: white;
+  text-align: center;
+  border: 5px solid #484443;
+  border-radius: 15px;
+  box-shadow: 0px 6px 4px rgba(0,0,0,.25);
+  width: 200px;
+  margin: 0 auto;
+  font-family: 'Roboto Slab', serif;
+}
+
+button#reset {
+  width: 100px;
+  padding: 10px 15px;
+  background-color: #3b3836;
+  border: none;
+  border-bottom: 5px solid #0e0c0f;
+  border-radius: 12px;
+  box-shadow: 0px 4px 5px rgba(0,0,0,.3);
+  outline: none;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: white;
+
+  transition-property: border-bottom, transform;
+  transition-duration: 250ms;
+}
+
+button#reset:hover {
+  transform: translate(0px, -3px);
+  border-bottom: 8px solid #0e0c0f;
+}
+label {
+  margin: 0 30px;
 }

@@ -2,36 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tic Tac Toe</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="https://use.fontawesome.com/0b8790a92d.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
 </head>
 <body>
-  <h1>Tic-Tac-Toe</h1>
-  <h2 id="curPlayer">Current Player</h2>
-  <div>
-    <div class="row">
-      <div class="cell" id="a_0_0"></div>
-      <div class="cell" id="a_0_1"></div>
-      <div class="cell" id="a_0_2"></div>
-   </div>
-   <div class="row">
-      <div class="cell" id="a_1_0"></div>
-      <div class="cell" id="a_1_1"></div>
-      <div class="cell" id="a_1_2"></div>
-    </div>
-    <div class="row">
-      <div class="cell" id="a_2_0"></div>
-      <div class="cell" id="a_2_1"></div>
-      <div class="cell" id="a_2_2"></div>
+  <div id="curPlayer" class="top">
+  </div>
+  <div class="board">
+    <div class="innerBoard">
+      <div class="row">
+        <div class="cell" id="a_0_0"></div>
+        <div class="cell" id="a_0_1"></div>
+        <div class="cell" id="a_0_2"></div>
+     </div>
+     <div class="row">
+        <div class="cell" id="a_1_0"></div>
+        <div class="cell" id="a_1_1"></div>
+        <div class="cell" id="a_1_2"></div>
+      </div>
+      <div class="row">
+        <div class="cell" id="a_2_0"></div>
+        <div class="cell" id="a_2_1"></div>
+        <div class="cell" id="a_2_2"></div>
+      </div>
     </div>
   </div>
+
   <div class="radioBut">
-    <label><input type="radio" class="radio" name="ai" id="aiX">AI plays X</label>
-    <label><input type="radio" class="radio" name="ai" id="aiO">AI plays O</label>
-    <label><input type="radio" class="radio" name="ai" id="ai" checked>No AI</label>
+    <label><input type="radio" class="radio" name="ai" id="aiX">
+      <i class="fa fa-laptop fa-2x" aria-hidden="true"></i>
+      <small>vs.</small>
+      <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+    </label>
+    <label><input type="radio" class="radio" name="ai" id="aiO">
+      <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+      <small>vs.</small>
+      <i class="fa fa-laptop fa-2x" aria-hidden="true"></i>
+    </label>
+    <label><input type="radio" class="radio" name="ai" id="ai" checked>
+      <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+      <small>vs.</small>
+      <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+    </label>
   </div>
   <button type="reset" id='reset'>Reset</button>
+
   <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>

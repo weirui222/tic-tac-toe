@@ -8,17 +8,24 @@ var theBoard;
 var moves;
 var computer = BLANK;
 
+var getImageForPlayer = function(player) {
+  if (player === X) {
+    return '<img src="img/bacon-x.png">';
+  } else {
+    return '<img src="img/egg-o.png">';
+  }
+}
 
 var switchPlayer = function() {
   curPlayer = (curPlayer === X) ? O : X;
-  document.getElementById('curPlayer').textContent = 'Current Player: ' + curPlayer;
+  document.getElementById('curPlayer').innerHTML = 'Current Player: ' + getImageForPlayer(curPlayer);
 };
 
 var canMove = function(board, i, j) {
   if (board[i][j] === BLANK) {
     return true;
   } else {
-    document.getElementById('curPlayer').textContent = 'Select a blank cell for ' + curPlayer;
+    document.getElementById('curPlayer').innerHTML = 'Select a blank cell for ' + getImageForPlayer(curPlayer);
     return false;
   }
 };
@@ -203,16 +210,16 @@ var makeMove = function(i, j, board) {
   moves++;
   board[i][j] = curPlayer;
   var element = document.getElementById('a_' + i + '_' + j);
-  element.textContent = curPlayer;
+  //element.textContent = curPlayer;
   element.className = 'cell cell' + curPlayer;
 
   if (hasWon(board, curPlayer, i, j)) {
     winner = curPlayer;
-    document.getElementById('curPlayer').textContent = winner + ' won!';
+    document.getElementById('curPlayer').innerHTML = getImageForPlayer(winner) + ' won!';
     return;
   } else if (moves === 9) {
     winner = NO_WINNER;
-    document.getElementById('curPlayer').textContent = 'It is a draw!';
+    document.getElementById('curPlayer').innerHTML = 'It is a draw!';
     return;
   }
 
