@@ -1,126 +1,427 @@
-body{
+/*** GLOBAL STYLES ***/
+
+body {
   height: 98vh;
   text-align: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
   font-size: 40px;
 }
-h2{
+
+h2 {
   margin-bottom: 30px;
   font-size: 20px;
 }
-.board {
-  height: 560px;
-  background: url("../img/pan.jpg");
-  background-size: 900px 560px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #e3e3e3;
-}
-.innerBoard {
-  padding-top: 122px;
-}
-.cell{
-  width: 100px;
-  height: 100px;
+
+h4 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+  padding: 0px 8px;
   display: inline-block;
-  vertical-align: top;
-  margin: 2px 0;
-  font-size: 40px;
-  line-height: 100px;
+  margin: 0;
 }
-.cellX{
-  background: url("../img/bacon-x.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+
+strong {
+  color: #F0C854;
 }
-.cellO{
-  background: url("../img/egg-o.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-button{
+
+button {
+  cursor: pointer;
   font-size: 20px;
-  margin-top: 20px;
   font-weight: 900;
   padding: 10px 20px;
+  font-family: 'Roboto Slab', serif;
   color: white;
-  background: Gray;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
 }
-label{
+
+label {
   font-size: 20px;
   font-weight: 700;
-
+  margin: 0 30px;
 }
-.radioBut{
+
+.kern {
+  margin-right: 10px;
+}
+
+
+/*** MAIN MENU ***/
+
+#menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 95vh;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.selectGame {
   margin-top: 30px;
   margin-bottom: 0px;
+  height: 65px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
+button.gameType {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 17px 9px 17px;
+  margin: 10px;
 
-@media (max-width: 480px) {
-  .cell {
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-  }
-  .board {
-    height: 280px;
-    background-size: 450px 280px;
-  }
-  .innerBoard {
-    padding-top: 61px;
-  }
-  button#reset {
-    margin-top: 10px;
-  }
-
-}
-
-img {
-  max-width: 18px;
-  max-height: 18px;
-  vertical-align: bottom;
-}
-#curPlayer {
-  background-color: #0e0c0f;
-  padding: 30px;
-  color: white;
-  text-align: center;
-  border: 5px solid #484443;
-  border-radius: 15px;
-  box-shadow: 0px 6px 4px rgba(0,0,0,.25);
-  width: 200px;
-  margin: 0 auto;
-  font-family: 'Roboto Slab', serif;
-}
-
-button#reset {
-  width: 100px;
-  padding: 10px 15px;
   background-color: #3b3836;
   border: none;
   border-bottom: 5px solid #0e0c0f;
   border-radius: 12px;
   box-shadow: 0px 4px 5px rgba(0,0,0,.3);
   outline: none;
-  font-family: 'Roboto Slab', serif;
-  font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 1px;
+
   color: white;
 
   transition-property: border-bottom, transform;
   transition-duration: 250ms;
 }
 
-button#reset:hover {
+button.gameType:hover {
   transform: translate(0px, -3px);
   border-bottom: 8px solid #0e0c0f;
 }
-label {
-  margin: 0 30px;
+
+button.gameType img {
+  width: 54px;
+}
+
+button.gameType small {
+  margin: 0 9px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+button#aiX {
+  padding: 10px 12px 9px 17px;
+}
+
+button#aiO {
+  padding: 10px 17px 9px 12px;
+}
+
+button#ai {
+  padding: 10px 12px 9px 12px;
+}
+
+#menu i {
+  color: #F0C854;
+  font-size: 30px;
+  margin: 8px 0 -27px 0;
+}
+
+#curPlayer {
+  color: white;
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 91px;
+  line-height: 1.1;
+  text-shadow: 0 4px #830600;
+}
+
+#userInfo {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: white;
+  width: 600px;
+  max-width: 95%;
+  margin-top: 34px;
+}
+
+#red-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(195,31,21,.9);
+}
+
+#red-multiply {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 98;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(195,31,21,1);
+  mix-blend-mode: multiply;
+}
+
+
+/*** GAME BOARD ***/
+
+.board {
+  background: url("../img/bkg.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 0;
+}
+
+.innerBoard {
+  background: url("../img/pan.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  mix-blend-mode: multiply;
+  height: 100vh;
+  max-height: 100vw;
+  width: 100%;
+  min-width: 125vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.rows {
+  width: 55vh;
+  height: 55vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1%;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cell {
+  width: 33%;
+  padding-bottom: 33%;
+  display: inline-block;
+  margin: 1%;
+}
+
+#img-board {
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  max-height: 100%;
+  max-width: 120%;
+  mix-blend-mode: multiply;
+}
+
+.cellX {
+  background: url("../img/bacon-x.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cellO {
+  background: url("../img/egg-o.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+/*** CONTROLS & TURN INDICATOR ***/
+
+#controls {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  width: calc(100vw - 32px);
+  padding: 0 16px;
+  z-index: 2;
+  visibility: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+#turn-indicator {
+  background-color: #0e0c0f;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  border: 5px solid #484443;
+  border-radius: 15px;
+  box-shadow: 0px 6px 4px rgba(0,0,0,.25);
+}
+
+button#menu-btn {
+  pointer-events: auto;
+  padding: 10px 18px 8px 18px;
+
+  font-size: 24px;
+  background-color: #3b3836;
+  border: none;
+  border-bottom: 5px solid #0e0c0f;
+  border-radius: 12px;
+  box-shadow: 0px 4px 5px rgba(0,0,0,.3);
+  outline: none;
+
+  color: white;
+
+  transition-property: border-bottom, transform;
+  transition-duration: 250ms;
+}
+
+button#menu-btn:hover {
+  transform: translate(0px, -3px);
+  border-bottom: 8px solid #0e0c0f;
+}
+
+button#reset {
+  cursor: pointer;
+  pointer-events: auto;
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #484443;
+  color: #989391;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  transition-property: background-color, color;
+  transition-duration: 250ms;
+}
+
+button#reset:hover {
+  background-color: #5f5a57;
+  color: white;
+}
+
+#turn-indicator img {
+  width: 30px;
+  margin-top: 5px;
+}
+
+#turn-indicator i {
+  display: block;
+  margin: 10px;
+  font-size: 20px;
+}
+
+i#left-arrow, i#right-arrow {
+  display: none;
+}
+
+.inactive {
+  color: #302E2E;
+}
+
+
+/*** MEDIA QUERIES ***/
+
+@media (max-width: 1000px) {
+
+  #turn-indicator {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 2px 3px 20px;
+  }
+
+  #turn-indicator img {
+    margin-bottom: 5px;
+  }
+
+  button#reset {
+    width: auto;
+    margin: 0 4px 0 20px;
+    padding: 6px 11px 7px 11px;
+  }
+
+  i#left-arrow, i#right-arrow {
+    display: inline-block;
+  }
+
+  i#left-arrow {
+    margin-left: 15px;
+  }
+
+  i#right-arrow {
+    margin-right: 15px;
+  }
+
+
+  i#up-arrow, i#down-arrow {
+    display: none;
+  }
+
+}
+
+@media (max-width: 680px) {
+
+  .rows {
+    width: 57vw;
+    height: 57vw;
+    margin-bottom: 2%;
+  }
+
+}
+
+@media (max-width: 490px) {
+
+  #controls {
+    flex-direction: column;
+  }
+
+  #turn-indicator {
+    width: calc(100% - 50px);
+    margin-top: 15px;
+    padding: 20px;
+    justify-content: space-around;
+    display: block;
+  }
+
+  #turn-indicator img {
+    margin: 0;
+  }
+
+  #turn-indicator h4, #turn-indicator img, #turn-indicator i {
+    line-height: 32px;
+    vertical-align: middle;
+    margin-top: -2px; margin-bottom: 18px;
+  }
+
+  button#reset {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 15px;
+    width: 100%;
+  }
+
+  #menu-btn {
+    width: 100%;
+    height: 60px;
+  }
 }

@@ -18,7 +18,22 @@ var getImageForPlayer = function(player) {
 
 var switchPlayer = function() {
   curPlayer = (curPlayer === X) ? O : X;
-  document.getElementById('curPlayer').innerHTML = 'Current Player: ' + getImageForPlayer(curPlayer);
+  if (curPlayer === X) {
+    document.getElementById("bacon-turn").setAttribute("src", "./img/bacon_act.svg");
+    document.getElementById("egg-turn").setAttribute("src", "./img/egg_in.svg");
+    document.getElementById("up-arrow").setAttribute("class", "fa fa-caret-up");
+    document.getElementById("left-arrow").setAttribute("class", "fa fa-caret-left");
+    document.getElementById("down-arrow").setAttribute("class", "fa fa-caret-down inactive");
+    document.getElementById("right-arrow").setAttribute("class", "fa fa-caret-right inactive");
+  } else {
+    document.getElementById("bacon-turn").setAttribute("src", "./img/bacon_in.svg");
+    document.getElementById("egg-turn").setAttribute("src", "./img/egg_act.svg");
+    document.getElementById("up-arrow").setAttribute("class", "fa fa-caret-up inactive");
+    document.getElementById("left-arrow").setAttribute("class", "fa fa-caret-left inactive");
+    document.getElementById("down-arrow").setAttribute("class", "fa fa-caret-down");
+    document.getElementById("right-arrow").setAttribute("class", "fa fa-caret-right");
+
+  }
 };
 
 var canMove = function(board, i, j) {
@@ -188,18 +203,20 @@ var getComputerPos = function(board) {
 };
 
 var makeComputerMove = function() {
-  if (winner !== BLANK) {
-    return;
-  }
+  setTimeout(function() { 
+    if (winner !== BLANK) {
+      return;
+    }
 
-  if (curPlayer !== computer) {
-    return;
-  }
+    if (curPlayer !== computer) {
+      return;
+    }
 
-  var pos = getComputerPos(theBoard);
+    var pos = getComputerPos(theBoard);
 
-  // eslint-disable-next-line no-use-before-define
-  makeMove(pos.i, pos.j, theBoard);
+    // eslint-disable-next-line no-use-before-define
+    makeMove(pos.i, pos.j, theBoard);
+  }, 700);
 };
 
 var makeMove = function(i, j, board) {
@@ -209,17 +226,31 @@ var makeMove = function(i, j, board) {
 
   moves++;
   board[i][j] = curPlayer;
+  document.getElementById("sizzle").play();
   var element = document.getElementById('a_' + i + '_' + j);
   //element.textContent = curPlayer;
   element.className = 'cell cell' + curPlayer;
 
   if (hasWon(board, curPlayer, i, j)) {
     winner = curPlayer;
-    document.getElementById('curPlayer').innerHTML = getImageForPlayer(winner) + ' won!';
+    document.getElementById('menu').style.visibility = 'visible';
+    document.getElementById('overlays').style.visibility = 'visible';
+    document.getElementById('controls').style.visibility = 'hidden';
+    if (winner === O) {
+      document.getElementById('curPlayer').innerHTML = 'Eggcellent!';
+      document.getElementById('userInfo').innerHTML = '<strong>Egg wins!</strong> Play again?';
+    } else {
+      document.getElementById('curPlayer').innerHTML = "Ssssmokin'!";
+      document.getElementById('userInfo').innerHTML = '<strong>Bacon wins!</strong> Play again?';
+    }
     return;
   } else if (moves === 9) {
     winner = NO_WINNER;
-    document.getElementById('curPlayer').innerHTML = 'It is a draw!';
+    document.getElementById('menu').style.visibility = 'visible';
+    document.getElementById('overlays').style.visibility = 'visible';
+    document.getElementById('controls').style.visibility = 'hidden';
+    document.getElementById('curPlayer').innerHTML = 'Nice fry.';
+    document.getElementById('userInfo').innerHTML = "<strong>It's a draw!</strong> Play again?";
     return;
   }
 
@@ -239,7 +270,11 @@ var onCellClick = function() {
   makeMove(pos.i, pos.j, theBoard);
 };
 
-var onRadioClick = function() {
+var onGameTypeClick = function() {
+  onResetClick();
+  document.getElementById('menu').style.visibility = 'hidden';
+  document.getElementById('overlays').style.visibility = 'hidden';
+  document.getElementById('controls').style.visibility = 'visible';
   // console.log(this.id);
   computer = this.id.substring(2);
   // console.log(computer);
@@ -255,11 +290,11 @@ var init = function() {
     cells[i].addEventListener('click', onCellClick);
   }
 
-  var radios = document.getElementsByClassName('radio');
+  var gameTypes = document.getElementsByClassName('gameType');
   // console.log(cells);
-  for (i = 0; i < radios.length; i++) {
+  for (i = 0; i < gameTypes.length; i++) {
     // console.log("add click cell " + cells[i].id);
-    radios[i].addEventListener('click', onRadioClick);
+    gameTypes[i].addEventListener('click', onGameTypeClick);
   }
 };
 
@@ -275,7 +310,7 @@ var onResetClick = function() {
 
   var cells = document.getElementsByClassName('cell');
   for (var i = 0; i < cells.length; i++) {
-    cells[i].textContent = BLANK;
+    cells[i].innerHTML = BLANK;
     cells[i].className = 'cell';
   }
 
@@ -283,6 +318,13 @@ var onResetClick = function() {
   makeComputerMove();
 };
 
+var onMenuClick = function() {
+  document.getElementById('menu').style.visibility = 'visible';
+  document.getElementById('overlays').style.visibility = 'visible';
+  console.log("holla");
+};
+
 document.getElementById('reset').addEventListener('click', onResetClick);
+document.getElementById('menu-btn').addEventListener('click', onMenuClick);
 init();
 onResetClick();
