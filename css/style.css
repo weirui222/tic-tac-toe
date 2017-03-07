@@ -387,6 +387,28 @@ i#left-arrow, i#right-arrow {
     margin-bottom: 2%;
   }
 
+  .selectGame {
+    height: auto;
+    flex-direction: column;
+  }
+
+  #curPlayer {
+    font-size: 74px;
+  }
+
+}
+
+@media (max-width: 580px) {
+
+  #curPlayer {
+    font-size: 49px;
+  }
+
+  #userInfo {
+    font-size: 16px;
+    width: 90%;
+  }
+
 }
 
 @media (max-width: 490px) {
@@ -396,9 +418,9 @@ i#left-arrow, i#right-arrow {
   }
 
   #turn-indicator {
-    width: calc(100% - 50px);
-    margin-top: 15px;
-    padding: 20px;
+    width: calc(100% - 10px);
+    margin-top: 8px;
+    padding: 15px 0 0 0;
     justify-content: space-around;
     display: block;
   }
@@ -410,7 +432,7 @@ i#left-arrow, i#right-arrow {
   #turn-indicator h4, #turn-indicator img, #turn-indicator i {
     line-height: 32px;
     vertical-align: middle;
-    margin-top: -2px; margin-bottom: 18px;
+    margin-top: -2px; margin-bottom: 14px;
   }
 
   button#reset {
@@ -418,6 +440,7 @@ i#left-arrow, i#right-arrow {
     margin: 0 auto;
     padding: 10px 15px;
     width: 100%;
+    border-radius: 0 0 9px 9px;
   }
 
   #menu-btn {

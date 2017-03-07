@@ -226,16 +226,18 @@ var makeMove = function(i, j, board) {
 
   moves++;
   board[i][j] = curPlayer;
-  document.getElementById("sizzle").play();
   var element = document.getElementById('a_' + i + '_' + j);
   //element.textContent = curPlayer;
   element.className = 'cell cell' + curPlayer;
 
   if (hasWon(board, curPlayer, i, j)) {
     winner = curPlayer;
-    document.getElementById('menu').style.visibility = 'visible';
-    document.getElementById('overlays').style.visibility = 'visible';
-    document.getElementById('controls').style.visibility = 'hidden';
+    document.getElementById("ding").play();
+    setTimeout(function() { 
+      document.getElementById('menu').style.visibility = 'visible';
+      document.getElementById('overlays').style.visibility = 'visible';
+      document.getElementById('controls').style.visibility = 'hidden';
+    }, 1500);
     if (winner === O) {
       document.getElementById('curPlayer').innerHTML = 'Eggcellent!';
       document.getElementById('userInfo').innerHTML = '<strong>Egg wins!</strong> Play again?';
@@ -252,6 +254,8 @@ var makeMove = function(i, j, board) {
     document.getElementById('curPlayer').innerHTML = 'Nice fry.';
     document.getElementById('userInfo').innerHTML = "<strong>It's a draw!</strong> Play again?";
     return;
+  } else {
+    document.getElementById("sizzle").play();
   }
 
   switchPlayer();
